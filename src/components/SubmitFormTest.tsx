@@ -10,6 +10,7 @@ export const SubmitFormTest: FC<Props> = (props) => {
   
   const {publicKey} = useWallet();
   const { user } = props
+  user.id
 
   const handleSubmit = async (event:any) => {
     event.preventDefault()
