@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { FormView } from "views";
+import { VerifyWalletView } from "views";
 import { DiscordUser } from "../utils/types";
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from "next";
@@ -18,7 +18,7 @@ export default function Index(props: Props) {
         <title>Atadian Loan Lending</title>
         <meta name="description" content="Atadian Loan Lending"/>
       </Head>
-      <FormView user={user}/>
+      <VerifyWalletView user={user}/>
     </div>
   );
 }

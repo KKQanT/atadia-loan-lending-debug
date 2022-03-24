@@ -38,8 +38,8 @@ model VerifyWalletV1 {
   discordFlag Int?
   discordPublicFlag Int?
   discortMfaEnable Boolean?
-  joinedServerId String @db.VarChar(1900)
-  joinedServerNAme String @db.VarChar(10100)
+  joinedServerId String? @db.VarChar(1900)
+  joinedServerName String? @db.VarChar(10100)
 }
 
 model lendSubmitV1 {

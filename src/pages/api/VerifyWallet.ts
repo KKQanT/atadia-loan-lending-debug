@@ -25,7 +25,6 @@ async function createVerifyWallet(
     const newEntry = await prisma.verifyWalletV1.create({
       data: {
         discordId: body.discordId,
-        createdAt: body.createdAt,
         walletAddress: body.walletAddress,
         discordUsername: body.discordUsername,
         discordDiscriminator: body.discordDiscriminator,
@@ -36,7 +35,7 @@ async function createVerifyWallet(
         discordPublicFlag: body.discordPublicFlag,
         discortMfaEnable: body.discortMfaEnable,
         joinedServerId: body.joinedServerId,
-        joinedServerNAme: body.joinedServerNAme,
+        joinedServerName : body.joinedServerName
       }
     });
     return res.status(200).json(newEntry); //success : true?????????
