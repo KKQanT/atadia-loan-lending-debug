@@ -18,3 +18,9 @@ model FormTest {
   last String
   walletAddress String
 }
+
+model FormTest2 {
+  id    Int   @default(autoincrement())  @id
+  discorduser String @db.VarChar(50)
+  walletAddress String
+}
