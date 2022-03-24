@@ -25,6 +25,7 @@ async function createVerifyWallet(
     const newEntry = await prisma.verifyWalletV1.create({
       data: {
         discordId: body.discordId,
+        createdAt: body.createdAt,
         walletAddress: body.walletAddress,
         discordUsername: body.discordUsername,
         discordDiscriminator: body.discordDiscriminator,

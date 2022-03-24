@@ -27,6 +27,7 @@ model FormTest2 {
 
 model VerifyWalletV1 {
   id    Int   @default(autoincrement())   @id
+  createdAt DateTime @default(now())
   discordId String
   walletAddress String
   discordUsername String
@@ -43,6 +44,7 @@ model VerifyWalletV1 {
 
 model lendSubmitV1 {
   id    Int   @default(autoincrement())   @id
+  createdAt DateTime @default(now())
   discordId String
   walletAddress String
   pfpTokenAddress String
