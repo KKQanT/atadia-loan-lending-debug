@@ -9,4 +9,6 @@ export interface DiscordUser {
   mfa_enabled: boolean | null;
   premium_type: number | null;
   email: string | null;
+  guildsName: string;
+  guildsId:string
 }
