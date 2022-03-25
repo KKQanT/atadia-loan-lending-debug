@@ -20,6 +20,7 @@ async function createLendSubmit(
   res: NextApiResponse
 ) {
   const body = req.body;
+  
   try {
     const newEntry = await prisma.lendSubmitV1.create({
       data : {
@@ -32,8 +33,10 @@ async function createLendSubmit(
         userTimeZoneShort: body.userTimeZoneShort,
         pohsRecipant: body.pohsRecipant
       }
-    })
+    });
+    return res.status(200).json(newEntry);
   } catch (error) {
-
+      console.error("Request error", error);
+      res.status(500).json({ error: 'Error creating data', success: false })
   }
 }
