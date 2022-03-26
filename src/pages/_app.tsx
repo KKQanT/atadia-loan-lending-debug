@@ -7,6 +7,7 @@ import { ContentContainer } from '../components/ContentContainer';
 import { Footer } from '../components/Footer';
 import Notifications from '../components/Notification'
 import { useRouter } from 'next/router';
+import { LoadingComponent } from "../components/LoadingComponent"
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 require('../styles/globals.css');
@@ -39,7 +40,9 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
               <ContentContainer>
                 { 
                   pageLoading
-                  ?(<div>Loading</div>)
+                  ?(<div className='m-auto'>
+                      <LoadingComponent/>
+                    </div>)
                   :<Component {...pageProps} />
                 }
               </ContentContainer>
