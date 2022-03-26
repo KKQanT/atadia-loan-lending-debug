@@ -1,6 +1,7 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { FC } from 'react';
 import { DiscordUser } from "utils/types";
+import { notify } from "../utils/notifications"
 
 interface Props {
   user: DiscordUser;
@@ -44,13 +45,12 @@ export const VerifyWallet: FC<Props> = (props) => {
       const response = await fetch(endpoint, options);
 
       if (response.status === 200) {
-        console.log('submitted');
-        alert('Wallet Added to our Database! Pls change your wallet if you wanna add another one!')
+        notify({type:'success', message:'wallet added!, ser! change your wallet and add again or go submit lending'});
       } else {
-        console.log('not 200');
+        notify({type:'error', message: `response status code : ${response.status}`});
       }
     } catch (error) {
-      console.log('error:', error);
+      notify({type:'error', message: `error : ${error}`});
     }
   };
 

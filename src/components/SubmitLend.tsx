@@ -1,6 +1,7 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import {FC, useState, useEffect} from 'react'
 import { DiscordUser } from "utils/types";
+import { notify } from 'utils/notifications'
 
 interface Props {
   user: DiscordUser;
@@ -22,7 +23,7 @@ export const SubmitLend: FC<Props> = (props) => {
       loanPackage: parseInt(event.target.loanPackage.value),
       userTimeZoneLong:event.target.userTimeZoneLong.value,
       userTimeZoneShort:'Blank',
-      pohsRecipant:true
+      pohsRecipant:false
     };
 
     const JSONdata = JSON.stringify(data);
@@ -41,12 +42,12 @@ export const SubmitLend: FC<Props> = (props) => {
       const response = await fetch(endpoint, options);
 
       if (response.status === 200) {
-        alert('submitted!')
+        notify({type:'success', message:'submit successfully, ser!'});
       } else {
-        alert('something wrong')
+        notify({type:'error', message: `response status code : ${response.status}`});
       }
     } catch (error) {
-      alert('cannot send data')
+      notify({type:'error', message: `error : ${error}`});
     }
   }
   
