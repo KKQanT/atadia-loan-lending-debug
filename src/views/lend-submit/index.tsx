@@ -3,14 +3,15 @@ import { SubmitLend } from "components/SubmitLend";
 import { DiscordUser } from "utils/types";
 
 interface Props {
-  user: DiscordUser
+  user: DiscordUser;
+  availablePackages: any;
 }
 
 export const SubmitLendView: FC<Props> = (props:Props) => {
-  const { user } = props;
+  const { user, availablePackages } = props;
   return (
     <div>
-      <SubmitLend user={user}/>
+      <SubmitLend user={user} availablePackages={availablePackages}/>
     </div>
   )
 }

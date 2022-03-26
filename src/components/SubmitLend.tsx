@@ -1,14 +1,15 @@
 import { useWallet } from "@solana/wallet-adapter-react";
-import {FC} from 'react'
+import {FC, useState, useEffect} from 'react'
 import { DiscordUser } from "utils/types";
 
 interface Props {
   user: DiscordUser;
+  availablePackages: any;
 }
-
 export const SubmitLend: FC<Props> = (props) => {
   const {publicKey} = useWallet();
-  const {user} = props;
+  const {user, availablePackages} = props;
+  console.log(availablePackages)
 
   const handleSubmit = async (event:any) => {
     event.preventDefault()
@@ -48,48 +49,51 @@ export const SubmitLend: FC<Props> = (props) => {
       alert('cannot send data')
     }
   }
+  
+  //fetchPackages(user)
 
   return (
-    <form onSubmit={handleSubmit}>
-      
-      <div>
-        <label htmlFor="pfpTokenAddress">PFP token address: </label>
-        <input type="text" id="pfpTokenAddress" name="pfpTokenAddress" required/>
-      </div>
-      
-      <div>
-        <label htmlFor="twitterHandle">Twitter handle: </label>
-        <input type="text" id="twitterHandle" name="twitterHandle" required/>
-      </div>
+    <div>
+      <form onSubmit={handleSubmit}>
+        
+        <div>
+          <label htmlFor="pfpTokenAddress">PFP token address: </label>
+          <input type="text" id="pfpTokenAddress" name="pfpTokenAddress" required/>
+        </div>
+        
+        <div>
+          <label htmlFor="twitterHandle">Twitter handle: </label>
+          <input type="text" id="twitterHandle" name="twitterHandle" required/>
+        </div>
+        <div>
+          <label htmlFor="loanPackage">
+            Loan package: 
+            <select name="loanPackage" id="loanPackage">
+              <option value="1" disabled={!availablePackages["1"]}>package 1</option>
+              <option value="2" disabled={!availablePackages["2"]} >package 2</option>
+              <option value="3" disabled={!availablePackages["3"]}>package 3</option>
+              <option value="4" disabled={!availablePackages["4"]}>package 4</option>
+              <option value="5" disabled={!availablePackages["5"]}>package 5</option>
+              <option value="6" disabled={!availablePackages["6"]}>package 6</option>
+            </select>
+          </label>
+        </div>
 
-      <div>
-        <label htmlFor="loanPackage">
-          Loan package: 
-          <select name="loanPackage" id="loanPackage">
-            <option value="1">package 1</option>
-            <option value="2">package 2</option>
-            <option value="3">package 3</option>
-            <option value="4">package 4</option>
-            <option value="5">package 5</option>
-            <option value="6">package 6</option>
-          </select>
-        </label>
-      </div>
+        <div>
+          <label htmlFor="userTimeZoneLong">
+            Timezone: 
+            <select name="userTimeZoneLong" id="userTimeZoneLong">
+              <option value="UTC-11 to UTC-6">UTC-11 to UTC-6</option>
+              <option value="UTC-5 to UTC">UTC-5 to UTC</option>
+              <option value="UTC to UTC+6">UTC to UTC+6</option>
+              <option value="UTC +7 to UTC+12">UTC +7 to UTC+12</option>
+            </select>
+          </label>
+        </div>
 
-      <div>
-        <label htmlFor="userTimeZoneLong">
-          Timezone: 
-          <select name="userTimeZoneLong" id="userTimeZoneLong">
-            <option value="UTC-11 to UTC-6">UTC-11 to UTC-6</option>
-            <option value="UTC-5 to UTC">UTC-5 to UTC</option>
-            <option value="UTC to UTC+6">UTC to UTC+6</option>
-            <option value="UTC +7 to UTC+12">UTC +7 to UTC+12</option>
-          </select>
-        </label>
-      </div>
-
-      <button type="submit" disabled={!publicKey}>Submit</button>
-      
-    </form>
+        <button type="submit" disabled={!publicKey}>Submit</button>
+        
+      </form>
+    </div>
   )
 }
