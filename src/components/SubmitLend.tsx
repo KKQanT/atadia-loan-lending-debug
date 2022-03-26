@@ -55,7 +55,7 @@ export const SubmitLend: FC<Props> = (props) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="bg-zinc-800 shadow-md rounded w-1/3 p-10 m-auto">
+      <form onSubmit={handleSubmit} className="bg-zinc-800 shadow-md rounded w-1/3 p-7 m-auto">
         
         <div className="mb-4 w-full">
           <label htmlFor="pfpTokenAddress" 
@@ -63,7 +63,7 @@ export const SubmitLend: FC<Props> = (props) => {
             PFP token address: 
           </label>
           <input type="text" id="pfpTokenAddress" name="pfpTokenAddress" 
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-900 
           leading-tight focus:outline-none focus:shadow-outline"
           required/>
         </div>
@@ -74,7 +74,7 @@ export const SubmitLend: FC<Props> = (props) => {
             Twitter handle: 
           </label>
           <input type="text" id="twitterHandle" name="twitterHandle" 
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-900 
           leading-tight focus:outline-none focus:shadow-outline"
           required/>
         </div>
@@ -85,7 +85,7 @@ export const SubmitLend: FC<Props> = (props) => {
             Timezone: 
             <select name="userTimeZoneLong" id="userTimeZoneLong"
             className="block appearance-none w-full bg-gray-200 
-            border border-gray-200 text-gray-700 py-3 px-4 pr-8 
+            border border-gray-200 text-zinc-900 py-3 px-4 pr-8 
             rounded leading-tight focus:outline-none focus:bg-white 
             focus:border-gray-500">
               <option value="UTC-11 to UTC-6">UTC-11 to UTC-6</option>
@@ -102,25 +102,37 @@ export const SubmitLend: FC<Props> = (props) => {
             Loan package: 
             <select name="loanPackage" id="loanPackage"
             className="block appearance-none w-full bg-gray-200 
-            border border-gray-200 text-gray-700 py-3 px-4 pr-8 
+            border border-gray-200 text-zinc-900 py-3 px-4 pr-8 
             rounded leading-tight focus:outline-none focus:bg-white 
             focus:border-gray-500">
-              <option value="1" disabled={!availablePackages["1"]}>package 1</option>
-              <option value="2" disabled={!availablePackages["2"]}>package 2</option>
-              <option value="3" disabled={!availablePackages["3"]}>package 3</option>
-              <option value="4" disabled={!availablePackages["4"]}>package 4</option>
-              <option value="5" disabled={!availablePackages["5"]}>package 5</option>
-              <option value="6" disabled={!availablePackages["6"]}>package 6</option>
+              <option value="2" disabled={!availablePackages["2"]}>
+                Lend : 1◎   Duration : 1 week   Repay: 1.05◎
+              </option>
+              <option value="3" disabled={!availablePackages["3"]}>
+                Lend : 2◎   Duration : 1 week   Repay: 2.1◎
+              </option>
+              <option value="4" disabled={!availablePackages["4"]}>
+                Lend : 3◎   Duration : 1 week   Repay: 3.15◎
+              </option>
+              <option value="5" disabled={!availablePackages["5"]}>
+                Lend : 4◎   Duration : 1 week   Repay: 2.2◎
+              </option>
+              <option value="1" disabled={!availablePackages["1"]}>
+                Don’t want a loan
+              </option>
             </select>
           </label>
         </div>
-        <div className="md:flex md:items-center">
+        <div className="mt-5">
+          Note: Some package might not be available for you based on judgment
+        </div>
+        <div className="md:flex md:items-center mt-10">
           <div className="m-auto">
             <button type="submit" disabled={!publicKey}
             className="text-white bg-gradient-to-br 
             from-purple-600 to-teal-400 hover:bg-gradient-to-bl 
             focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 
-            font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            font-medium rounded-lg text-sm px-8 py-2.5 text-center mr-2 mb-2"
             >Submit</button>
           </div>
         </div>
