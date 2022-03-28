@@ -13,6 +13,7 @@ export const SubmitLend: FC<Props> = (props) => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [availablePackages, setAvailablePackages] = useState(null)
+  const [isSubmitting, setisSubmitting] = useState(false)
 
   useEffect(() => {
     async function fetchAllApi() {
@@ -74,9 +75,9 @@ export const SubmitLend: FC<Props> = (props) => {
     }
 
     try {
-      setIsLoading(true);
+      setisSubmitting(true);
       const response = await fetch(endpoint, options);
-      setIsLoading(false);
+      setisSubmitting(false);
 
       if (response.status === 200) {
         notify({ type: 'success', message: 'submit successfully, ser!' });
@@ -174,16 +175,22 @@ export const SubmitLend: FC<Props> = (props) => {
         </div>
         <div className="md:flex md:items-center mt-10">
           <div className="m-auto">
-            <button type="submit" disabled={!publicKey}
+            {!publicKey
+            ?<button className="text-white bg-gray-400  
+            font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            type="submit" disabled={!publicKey}>
+              <span> Submit </span>
+            </button>
+            :<button type="submit" disabled={!publicKey}
               className="text-white bg-gradient-to-br 
             from-purple-600 to-teal-400 hover:bg-gradient-to-bl 
             focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 
             font-medium rounded-lg text-sm px-8 py-2.5 text-center mr-2 mb-2"
             >
-              {isLoading
+              {isSubmitting
                 ? <span> Submitting... </span>
                 : <span> Submit </span>}
-            </button>
+            </button>}
           </div>
         </div>
       </form>
