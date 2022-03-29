@@ -6,7 +6,7 @@ import { DiscordUser } from "../../utils/types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { notify } from "utils/notifications";
 
-const scope = ['identify', 'email' , 'guilds'].join(" ");
+const scope = ['identify', 'email'].join(" ");
 const REDIRECT_URI = `${config.appUri}/api/oauth`;
 
 const OAUTH_QS = new URLSearchParams({
@@ -55,20 +55,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     headers: { Authorization: `${token_type} ${access_token}` },
   }).then((res) => res.json());
 
-  const guildsRes  = await fetch("http://discord.com/api/users/@me/guilds", {
-    headers: { Authorization: `${token_type} ${access_token}` },
-  })
-  const guilds = await guildsRes.json();
-
-  let guildsName='';
-  let guildsId='';
-  guilds.forEach(function(item) {
-    guildsName = guildsName+item.name+',';
-    guildsId = guildsId+item.id+',';
-  })
-  me["guildsName"] = guildsName.substring(0, guildsName.length-1);
-  me["guildsId"] = guildsId.substring(0, guildsId.length-1);
-
+  
   if (!("id" in me)) {
     return res.redirect(`${config.appUri}/id-error`);
   }
