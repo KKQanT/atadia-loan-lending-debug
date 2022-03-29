@@ -44,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }).then((res) => res.json());
 
   if (!access_token || typeof access_token !== "string") {
-    return res.redirect(OAUTH_URI);
+    return res.redirect(`${config.appUri}/access-token-error`);
   }
 
   const me: DiscordUser | { unauthorized: true } = await fetch("http://discord.com/api/users/@me", {
@@ -66,7 +66,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   me["guildsId"] = guildsId.substring(0, guildsId.length-1);
 
   if (!("id" in me)) {
-    return res.redirect(OAUTH_URI);
+    return res.redirect(`${config.appUri}/id-error`);
   }
 
   const token = sign(me, config.jwtSecret, { expiresIn: "24h" });
