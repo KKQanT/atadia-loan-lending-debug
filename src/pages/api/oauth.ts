@@ -28,8 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (!code || typeof code !== "string") {
-    notify({type:'error', message: `code error`})
-    return res.redirect("/code-error")
+    return res.redirect(OAUTH_URI)
   };
   
 
