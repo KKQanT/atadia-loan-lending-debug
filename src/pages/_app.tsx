@@ -30,7 +30,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
           <Head>
-            <title>Atadia-lending-lab</title>
+            <title>Atadia Lending Lab</title>
           </Head>
 
           <ContextProvider>
