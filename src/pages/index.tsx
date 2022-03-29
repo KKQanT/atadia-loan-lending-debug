@@ -74,24 +74,17 @@ export default function Index(props: Props) {
 
         </p>
       </div>
-      <div className="flex v-screen pt-6">
+      {!user
+      ?<div>No user</div>
+      :<div className="flex v-screen pt-6">
         <VerifyWalletView user={user}/>
-      </div>
+      </div>}
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async function (ctx) {
   const user = parseUser(ctx);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/api/oauth",
-        permanent: false,
-      },
-    };
-  }
 
   return { props: { user } };
 };

@@ -4,6 +4,7 @@ import { config } from "../../utils/config";
 import { sign } from "jsonwebtoken";
 import { DiscordUser } from "../../utils/types";
 import { NextApiRequest, NextApiResponse } from "next";
+import { notify } from "utils/notifications";
 
 const scope = ['identify', 'email' , 'guilds'].join(" ");
 const REDIRECT_URI = `${config.appUri}/api/oauth`;
@@ -26,7 +27,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.redirect(`/?error=${req.query.error}`);
   }
 
-  if (!code || typeof code !== "string") return res.redirect(OAUTH_URI);
+  if (!code || typeof code !== "string") {
+    notify({type:'error', message: `code error`})
+    return res.redirect("/code-error")
+  };
+  
 
   const body = new URLSearchParams({
     client_id: config.clientId,
