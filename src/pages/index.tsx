@@ -4,14 +4,16 @@ import { DiscordUser } from "../utils/types";
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from "next";
 import { parseUser } from "../utils/parse-user";
+import { parseStatus } from '../utils/parse-user2'
 
 interface Props {
   user: DiscordUser;
+  status:string
 }
 
 export default function Index(props: Props) {
   const router = useRouter()
-  const { user } = props
+  const { user, status } = props
   return (
     <div>
       <Head>
@@ -75,7 +77,7 @@ export default function Index(props: Props) {
         </p>
       </div>
       {!user
-      ?<div>No user</div>
+      ?<div>{status}</div>
       :<div className="flex v-screen pt-6">
         <VerifyWalletView user={user}/>
       </div>}
@@ -85,7 +87,7 @@ export default function Index(props: Props) {
 
 export const getServerSideProps: GetServerSideProps<Props> = async function (ctx) {
   const user = parseUser(ctx);
-
-  return { props: { user } };
+  const status = parseStatus(ctx)
+  return { props: { user, status } };
 };
 
